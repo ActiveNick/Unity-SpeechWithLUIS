@@ -218,7 +218,7 @@ Prefab:
     - target: {fileID: 114188203539520358, guid: 1cb2d102fe645a84eb298c48c4fc810f,
         type: 2}
       propertyPath: TestUtterance
-      value: Make the cube bigger
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1347998523252160, guid: 1cb2d102fe645a84eb298c48c4fc810f, type: 2}
       propertyPath: m_IsActive
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191a39b4e52ca2042b4d6913e578660c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntityName: Test Tube
+  EntityName: Tube
   EntityType: Cylinder
 --- !u!114 &393811219
 MonoBehaviour:
@@ -678,6 +678,7 @@ MonoBehaviour:
   UseClientSideSilenceDetection: 0
   SilenceThreshold: 0.002
   SilenceTimeout: 3
+  luis: {fileID: 1776187685}
 --- !u!4 &1025639446
 Transform:
   m_ObjectHideFlags: 0
@@ -1100,7 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191a39b4e52ca2042b4d6913e578660c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntityName: Boxey
+  EntityName: Box
   EntityType: Cube
 --- !u!114 &1086835824
 MonoBehaviour:
@@ -1430,7 +1431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191a39b4e52ca2042b4d6913e578660c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntityName: Bouncy Ball
+  EntityName: Ball
   EntityType: Sphere
 --- !u!114 &1730099939
 MonoBehaviour:

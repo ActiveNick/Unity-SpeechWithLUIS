@@ -46,6 +46,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using Microsoft.MR.LUIS;
 using SpeechRecognitionService;
 
 public class SpeechManager : MonoBehaviour {
@@ -85,6 +86,9 @@ public class SpeechManager : MonoBehaviour {
     int recordingSamples = 0;
     List<byte> recordingData;
 
+    // LUIS Integration
+    public LuisManager luis;
+    
     /// <summary>
     /// This event is called when speech has ended.
     /// </summary>
@@ -363,6 +367,12 @@ public class SpeechManager : MonoBehaviour {
                 }
 
                 UpdateUICanvasLabel(result.Result.DisplayText, FontStyle.Normal);
+
+                // LUIS integration after speech recognition
+                if (luis != null)
+                {
+                    luis.PredictAndHandleAsync(result.Result.DisplayText);
+                }
 
                 Debug.Log("* RECOGNITION STATUS: " + result.Result.RecognitionStatus);
                 Debug.Log("* FINAL RESULT: " + result.Result.DisplayText);
