@@ -51,7 +51,7 @@ using SpeechRecognitionService;
 public class SpeechManager : MonoBehaviour {
 
     // Public fields
-    public Text DisplayLabel;
+    public TextMesh DisplayLabel;
 
     [Tooltip("Whether or not the Speech Manager should trigger the end of dictation through the use of silence detection, which is confirgurable via the the Silence Treshold and Silence Timeout settings below. Service-side silence detection is enabled by default.")]
     public bool UseClientSideSilenceDetection = false;
