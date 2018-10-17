@@ -32,6 +32,7 @@ using System.Net.Security;
 using System.Threading.Tasks;
 using UnityEngine;
 using System.Linq;
+using Microsoft.Unity;
 
 #if !UNITY_WSA || UNITY_EDITOR
 using System.Security.Cryptography.X509Certificates;

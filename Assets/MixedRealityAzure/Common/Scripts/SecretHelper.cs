@@ -37,7 +37,7 @@ using UnityEngine;
 using System.Security.Cryptography.X509Certificates;
 #endif
 
-namespace Microsoft.MR
+namespace Microsoft.Unity
 {
 	/// <summary>
 	/// An attribute that can be used to designate where a secret value is held.

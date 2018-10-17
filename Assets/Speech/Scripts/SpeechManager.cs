@@ -48,11 +48,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using Microsoft.MR.LUIS;
 using SpeechRecognitionService;
+using Microsoft.Unity;
 
 public class SpeechManager : MonoBehaviour {
 
     // Public fields
     public TextMesh DisplayLabel;
+
+    [Tooltip("Connection string to Azure Storage account.")]
+    [SecretValue("SpeechService_APIKey")]
+    public string SpeechServiceAPIKey = string.Empty;
 
     [Tooltip("Whether or not the Speech Manager should trigger the end of dictation through the use of silence detection, which is confirgurable via the the Silence Treshold and Silence Timeout settings below. Service-side silence detection is enabled by default.")]
     public bool UseClientSideSilenceDetection = false;
@@ -97,6 +102,12 @@ public class SpeechManager : MonoBehaviour {
     /// </remarks>
     public event EventHandler SpeechEnded;
 
+    private void Awake()
+    {
+        // Attempt to load API secrets
+        SecretHelper.LoadSecrets(this);
+    }
+
     // Use this for initialization
     void Start () {
         // Make sure to comment the following line unless you're debugging
@@ -135,12 +146,10 @@ public class SpeechManager : MonoBehaviour {
         // END DELETE
 #if USENEWSPEECHSDK
         bool useClassicBingSpeechService = false;
-        //string authenticationKey = @"INSERT-YOUR-NEW-SPEECH-API-KEY-HERE";
-        string authenticationKey = @"895664ef53e44b6fac574c3ecd6f3b75";
+        string authenticationKey = SpeechServiceAPIKey;
 #else
         bool useClassicBingSpeechService = true;
-        //string authenticationKey = @"INSERT-YOUR-BING-SPEECH-API-KEY-HERE";
-        string authenticationKey = @"4d5a1beefe364f8986d63a877ebd51d5";
+        string authenticationKey = SpeechServiceAPIKey;
 #endif
 
         try
@@ -376,6 +385,11 @@ public class SpeechManager : MonoBehaviour {
 
                 Debug.Log("* RECOGNITION STATUS: " + result.Result.RecognitionStatus);
                 Debug.Log("* FINAL RESULT: " + result.Result.DisplayText);
+            } else
+            {
+                string msg = String.Format("Other result. See details below:{0}Path: {1}{2}Status: {3}",
+                Environment.NewLine, result.Path.ToString(), Environment.NewLine, result.Result.RecognitionStatus);
+                Debug.LogError(msg);
             }
 
         }
@@ -573,7 +587,7 @@ public class SpeechManager : MonoBehaviour {
             }
             Debug.Log($"Microphone stopped recording at frequency {audiosource.clip.frequency}Hz.");
         });
-        UpdateUICanvasLabel("Recording stopped. Audio saved to file 'recording.wav'.", FontStyle.Normal);
+        UpdateUICanvasLabel("Recording stopped.", FontStyle.Normal);
     }
 
     /// <summary>
