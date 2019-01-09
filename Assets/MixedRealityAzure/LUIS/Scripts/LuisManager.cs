@@ -54,16 +54,16 @@ namespace Microsoft.MR.LUIS
 
         #region Unity Inspector Variables
         [Tooltip("The application ID of the LUIS application.")]
-		[SecretValue("LUIS.AppId")]
+		[SecretValue("LUIS_AppId_Shapes")]
 		public string AppId;
 
 		[Tooltip("The application subscription key of the LUIS application.")]
-		[SecretValue("LUIS.AppKey")]
+		[SecretValue("LUIS_AppKey_Shapes")]
 		public string AppKey;
 
 		[Tooltip("String that represents the domain of the LUIS endpoint.")]
-		[SecretValue("LUIS.Domain")]
-		public string Domain = "";
+		[SecretValue("LUIS_Region_Shapes")]
+		public string Region = "";
 
         [Tooltip("The minimum confidence level for an intent to be handled.")]
         [Range(0,1)]
@@ -82,7 +82,7 @@ namespace Microsoft.MR.LUIS
 			if (client == null)
 			{
 				if (!this.enabled) { throw new InvalidOperationException($"Attempting to connect to LUIS but {nameof(LuisManager)} is not enabled."); }
-				client = new LuisClient(AppId, AppKey, Verbose, Domain);
+				client = new LuisClient(AppId, AppKey, Verbose, Region);
 			}
 		}
 		#endregion // Internal Methods
@@ -117,9 +117,9 @@ namespace Microsoft.MR.LUIS
 				this.enabled = false;
 			}
 
-			if (string.IsNullOrEmpty(Domain))
+			if (string.IsNullOrEmpty(Region))
 			{
-				Debug.LogErrorFormat($"'{nameof(Domain)}' is required but is not set. {nameof(LuisManager)} has been disabled.");
+				Debug.LogErrorFormat($"'{nameof(Region)}' is required but is not set. {nameof(LuisManager)} has been disabled.");
 				this.enabled = false;
 			}
 
